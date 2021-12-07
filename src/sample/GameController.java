@@ -159,6 +159,7 @@ public class GameController implements Initializable {
                 printInfo(resetPlayer);
             }
 
+            textAreaInfo.clear();
             onTheMovePlayer = null;
             changePlayerOnTheMove();
 
@@ -218,7 +219,6 @@ public class GameController implements Initializable {
         } else {
             System.out.println("You can throw cube just once!");
         }
-
     }
 
     @FXML
@@ -815,4 +815,3 @@ public class GameController implements Initializable {
         yellowName.setText(yellowPlayer.getName());
     }
 }
-
