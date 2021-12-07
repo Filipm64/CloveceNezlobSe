@@ -412,37 +412,27 @@ public class GameController implements Initializable {
 
         if (!getCircle("#" + futureId).getFill().equals(colorWhite)) {
 
-            System.out.println(greenPlayer.getPawn1());
-            System.out.println(greenPlayer.getPawn2());
-            System.out.println(greenPlayer.getPawn3());
-            System.out.println(greenPlayer.getHome4());
-
             Player checkTakingPlayer;
 
             for (int i = 0; i < playersList.size(); i++) {
                 checkTakingPlayer = playersList.get(i);
 
-
                 if (checkTakingPlayer.getPawn1().equals(futureId)) {
-                    System.out.println("You will take pawn1");
                     getCircle("#" + futureId).setFill(colorWhite);
                     getCircle("#" + checkTakingPlayer.getHome1()).setFill(checkTakingPlayer.getColor());
                     checkTakingPlayer.setPawn1(checkTakingPlayer.getHome1());
                     printInfo(checkTakingPlayer);
-                } else if (bluePlayer.getPawn2().equals(futureId)) {
-                    System.out.println("You will take pawn2");
+                } else if (checkTakingPlayer.getPawn2().equals(futureId)) {
                     getCircle("#" + futureId).setFill(colorWhite);
                     getCircle("#" + checkTakingPlayer.getHome2()).setFill(checkTakingPlayer.getColor());
                     checkTakingPlayer.setPawn2(checkTakingPlayer.getHome2());
                     printInfo(checkTakingPlayer);
-                } else if (bluePlayer.getPawn3().equals(futureId)) {
-                    System.out.println("You will take pawn3");
+                } else if (checkTakingPlayer.getPawn3().equals(futureId)) {
                     getCircle("#" + futureId).setFill(colorWhite);
                     getCircle("#" + checkTakingPlayer.getHome3()).setFill(checkTakingPlayer.getColor());
                     checkTakingPlayer.setPawn3(checkTakingPlayer.getHome3());
                     printInfo(checkTakingPlayer);
-                } else if (bluePlayer.getPawn4().equals(futureId)) {
-                    System.out.println("You will take pawn4");
+                } else if (checkTakingPlayer.getPawn4().equals(futureId)) {
                     getCircle("#" + futureId).setFill(colorWhite);
                     getCircle("#" + checkTakingPlayer.getHome4()).setFill(checkTakingPlayer.getColor());
                     checkTakingPlayer.setPawn4(checkTakingPlayer.getHome4());
