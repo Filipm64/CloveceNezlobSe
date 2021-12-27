@@ -19,9 +19,9 @@
       <Label layoutX="106.0" layoutY="155.0" text="Zelený hráč" />
       <Label layoutX="102.0" layoutY="198.0" text="Červený hráč" />
       <Label layoutX="110.0" layoutY="245.0" text="Žlutý hráč" />
-      <CheckBox fx:id="blueBot" layoutX="409.0" layoutY="114.0" mnemonicParsing="false" text="Bot" />
-      <CheckBox fx:id="greenBot" layoutX="409.0" layoutY="155.0" mnemonicParsing="false" text="Bot" />
-      <CheckBox fx:id="redBot" layoutX="410.0" layoutY="198.0" mnemonicParsing="false" text="Bot" />
-      <CheckBox fx:id="yellowBot" layoutX="410.0" layoutY="245.0" mnemonicParsing="false" text="Bot" />
+      <CheckBox fx:id="blueBot" layoutX="409.0" layoutY="114.0" mnemonicParsing="false" text="Bot" visible="false" />
+      <CheckBox fx:id="greenBot" layoutX="409.0" layoutY="155.0" mnemonicParsing="false" text="Bot" visible="false" />
+      <CheckBox fx:id="redBot" layoutX="410.0" layoutY="198.0" mnemonicParsing="false" text="Bot" visible="false" />
+      <CheckBox fx:id="yellowBot" layoutX="410.0" layoutY="245.0" mnemonicParsing="false" text="Bot" visible="false" />
    </children>
 </AnchorPane>

@@ -67,10 +67,10 @@ public class MenuController implements Initializable {
         MenuController.names[2] = redPlayer;
         MenuController.names[3] = yellowPlayer;
 
-        bots[0] = blueBot.isSelected();
-        bots[1] = greenBot.isSelected();
-        bots[2] = redBot.isSelected();
-        bots[3] = yellowBot.isSelected();
+        bots[0] = false; //blueBot.isSelected();
+        bots[1] = false; //greenBot.isSelected();
+        bots[2] = false; //redBot.isSelected();
+        bots[3] = false; //yellowBot.isSelected();
 
 
         //close menuWindow
