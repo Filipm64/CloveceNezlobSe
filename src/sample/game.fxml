@@ -250,5 +250,5 @@
          <Font size="14.0" />
       </font>
    </Label>
-   <CheckBox fx:id="checkInfo" layoutX="920.0" layoutY="530.0" mnemonicParsing="false" onAction="#showHideInfo" selected="true" text="Zobrazit informace" />
+   <CheckBox fx:id="checkInfo" layoutX="920.0" layoutY="530.0" mnemonicParsing="false" onAction="#showHideInfo" selected="true" text="Zobrazit info" />
 </AnchorPane>

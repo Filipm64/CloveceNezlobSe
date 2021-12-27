@@ -83,6 +83,7 @@ public class MenuController implements Initializable {
         Scene scene = new Scene(fxmlloader.load());
         Stage gameStage = new Stage();
         gameStage.setScene(scene);
+        gameStage.setTitle("Človeče nezlob se HRACÍ DESKA");
         gameStage.show();
 
     }

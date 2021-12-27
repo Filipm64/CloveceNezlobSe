@@ -194,23 +194,19 @@ public class GameController implements Initializable {
 
     @FXML
     public void buttonCube() throws InterruptedException {
-
         System.out.println("buttonCube");
 
         Random rd = new Random();
 
         if (!cubeThrown) {
-            //cube = rd.nextInt(6) + 1;
-            cube = Integer.parseInt(cubeHack.getText());
+            cube = rd.nextInt(6) + 1;
+            //cube = Integer.parseInt(cubeHack.getText());
 
             button.setText("Hozeno: " + cube);
             cubePicture.setImage(images[cube - 1]);
-            System.out.println("Cube is: " + cube);
             cubeThrown = true;
 
             if (!canMove()) {
-                System.out.println("I CAN NOT MOVE!!! ON THE MOVE IS NEXT PLAYER");
-                //textAreaInfo.appendText("You can not move \n");
                 textAreaInfo.appendText(onTheMovePlayer.getName() + " nemáš jak pohnout \n");
                 changePlayerOnTheMove();
             } else {
@@ -230,32 +226,23 @@ public class GameController implements Initializable {
             return;
         }
         clickedCircle = (Circle) mouseEvent.getSource();
-
         clickedPawn(clickedCircle);
-
     }
 
     public void clickedPawn(Circle circle) throws InterruptedException {
-
+        System.out.println("clickedPawn()");
         clickedCircle = circle;
-
-        //Paint barva = clickedCircle.getFill();
 
         // určování kdo zrovna kliknul na políčko
         if (colorBlue.equals(clickedCircle.getFill())) {
-            System.out.println("You clicked blue circle");
             clickedPlayer = bluePlayer;
         } else if (colorGreen.equals(clickedCircle.getFill())) {
-            System.out.println("You clicked green circle");
             clickedPlayer = greenPlayer;
         } else if (colorRed.equals(clickedCircle.getFill())) {
-            System.out.println("You clicked red circle");
             clickedPlayer = redPlayer;
         } else if (colorYellow.equals(clickedCircle.getFill())) {
-            System.out.println("You clicked yellow circle");
             clickedPlayer = yellowPlayer;
         } else {
-            System.out.println("Nevím na jakou barvu jsi kliknul");
             return;
         }
 
@@ -487,7 +474,6 @@ public class GameController implements Initializable {
                     System.out.println(onTheMovePlayer.getName() + " is winner, onTheMovePlayer++");
                     onTheMoveIndex++;
                 }
-
                  */
             }
             if (onTheMoveIndex >= playersList.size()) {
@@ -515,9 +501,6 @@ public class GameController implements Initializable {
         playerOnTheMoveLabel.setTextFill(onTheMovePlayer.getColor());
         textAreaInfo.appendText("NYNÍ HRAJE  " + onTheMovePlayer.getName() + "\n");
         textAreaInfo.appendText(onTheMovePlayer.getName() + " hoď kostkou \n");
-        //System.out.println("ON THE MOVE IS: " + onTheMovePlayer.getColorString());
-
-        //textAreaInfo.appendText("On the move is: " + onTheMovePlayer.getColorString() + "\n");
         cubeThrown = false;
 
         if (onTheMovePlayer.getIsBot()) {
@@ -533,10 +516,6 @@ public class GameController implements Initializable {
         if(canMove()){
             //clickedPawn(getCircle(onTheMovePlayer.getPawn1()));
         }
-
-
-            System.out.println("Bot can move, MOVE");
-
             String[] pawns = new String[4];
             pawns[0] = onTheMovePlayer.getPawn1();
             pawns[1] = onTheMovePlayer.getPawn2();
@@ -548,7 +527,6 @@ public class GameController implements Initializable {
             futureIds[1] = null;
             futureIds[2] = null;
             futureIds[3] = null;
-
 
             for (int x = 0; x < futureIds.length; x++) {
                 System.out.println("Pawn" + x + " future id: " + futureIds[x]);
@@ -659,17 +637,16 @@ public class GameController implements Initializable {
                 }
             }
         }
-
         System.out.println("Pawn1 can move: " + canMovePawns[0]);
         System.out.println("Pawn2 can move: " + canMovePawns[1]);
         System.out.println("Pawn3 can move: " + canMovePawns[2]);
         System.out.println("Pawn4 can move: " + canMovePawns[3]);
 
         if (canMovePawns[0] || canMovePawns[1] || canMovePawns[2] || canMovePawns[3]) {
-            System.out.println("IN TOTAL YOU CAN MOVE");
+            System.out.println("canMove()true");
             return true;
         } else {
-            System.out.println("IN TOTAL YOU CAN NOT MOVE");
+            System.out.println("canMove() false");
             return false;
         }
     }
@@ -687,9 +664,6 @@ public class GameController implements Initializable {
         finishes[1] = "#" + onTheMovePlayer.getFinish2();
         finishes[2] = "#" + onTheMovePlayer.getFinish3();
         finishes[3] = "#" + onTheMovePlayer.getFinish4();
-
-        System.out.println("Pawn: " + onTheMovePlayer.getPawn4());
-        System.out.println("Finish: " + finishes[0]);
 
         for (int i = 0; i < finishes.length; i++) {
             if (finishes[i].equals(onTheMovePlayer.getPawn1())) {
@@ -728,7 +702,6 @@ public class GameController implements Initializable {
             alert.setContentText("I have a great message for you!");
 
             winnerListArea.getItems().add(onTheMovePlayer.getName());
-            //playersList.remove(onTheMovePlayer.getIndexPlayer());
             onTheMovePlayer.setIsWinner(true);
             alert.showAndWait();
         }
@@ -744,20 +717,9 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Parent paren1 = playerOnTheMoveLabel.getParent().getParent();
-        if(!playerOnTheMoveLabel.isVisible()){
-            System.out.println("IS NOT VISIBLE");
-        }
 
         String[] playersNames = MenuController.getNames();
         boolean[] playersBots = MenuController.getBots();
-
-
-        System.out.println("is bluePlayer bot: " + playersBots[0]);
-        System.out.println("is GreenPlayerBot: " + playersBots[1]);
-        System.out.println("is redPlayer bot: " + playersBots[2]);
-        System.out.println("is yellowPlayer bot: " + playersBots[3]);
-
 
         try {
             images[0] = new Image(new FileInputStream("1.PNG"));
@@ -786,7 +748,6 @@ public class GameController implements Initializable {
         yellowPlayer = new Player(playersNames[3], colorYellow, "30", "yellowH-1", "yellowH-2", "yellowH-3", "yellowH-4",
                 "yellowH-1", "yellowH-2", "yellowH-3", "yellowH-4", "29", "yellowF-0", "yellowF-1", "yellowF-2", "yellowF-3",
                 "yellow", "yellowF-", 3, false, playersBots[3]);
-
 
         playersList.add(bluePlayer);
         playersList.add(greenPlayer);
