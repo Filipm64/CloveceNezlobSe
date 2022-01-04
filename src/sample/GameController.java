@@ -621,7 +621,7 @@ public class GameController implements Initializable {
                         //System.out.println("Pawn" + (i + 1) + " is out of the home");
                     } else {
                         String futureIdString = "#" + onTheMovePlayer.getFinishText() + futureId;
-                        System.out.println("Future id in home is: " + futureIdString);
+                        //System.out.println("Future id in home is: " + futureIdString);
 
                         System.out.println("CHECK IF FINISH IS OCCUPIED");
                         for (int x = 0; x < 4; x++) {
