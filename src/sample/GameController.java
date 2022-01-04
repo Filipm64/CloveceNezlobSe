@@ -526,12 +526,12 @@ public class GameController implements Initializable {
             futureIds[1] = null;
             futureIds[2] = null;
             futureIds[3] = null;
-/*
+
             for (int x = 0; x < futureIds.length; x++) {
-                System.out.println("Pawn" + x + " future id: " + futureIds[x]);
+                System.out.println("Pawn" + (x + 1) + " future id: " + futureIds[x]);
             }
 
- */
+
     }
 
     public boolean canMove() {
