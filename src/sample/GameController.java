@@ -197,8 +197,8 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            cube = rd.nextInt(6) + 1;
-            //cube = Integer.parseInt(cubeHack.getText());
+            //cube = rd.nextInt(6) + 1;
+            cube = Integer.parseInt(cubeHack.getText());
 
             button.setText("Hozeno: " + cube);
             cubePicture.setImage(images[cube - 1]);
@@ -298,6 +298,7 @@ public class GameController implements Initializable {
         String futureIdString = idSplit[0] + "-" + futureId;
 
         if (futureId > 3) {
+            System.out.println("I can not move I will be out");
             return false;
         }
 
@@ -305,32 +306,34 @@ public class GameController implements Initializable {
 
 
             if (("#" + futureIdString).equals(pawns[i])) {
+                System.out.println("I can not move on my future circle is someone");
                 return false;
             } else {
 
-                if (onTheMovePlayer.getPawn1().equals("#" + clickedCircle.getId())) {
+                if (onTheMovePlayer.getPawn1().equals(clickedCircle.getId())) {
                     System.out.println("Pawn1");
-                    getCircle(onTheMovePlayer.getPawn1()).setFill(Color.WHITE);
+                    getCircle("#" + onTheMovePlayer.getPawn1()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn1(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn2().equals("#" + clickedCircle.getId())) {
+                } else if (onTheMovePlayer.getPawn2().equals(clickedCircle.getId())) {
                     System.out.println("Pawn2");
-                    getCircle(onTheMovePlayer.getPawn2()).setFill(Color.WHITE);
+                    getCircle("#" + onTheMovePlayer.getPawn2()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn2(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn3().equals("#" + clickedCircle.getId())) {
+                } else if (onTheMovePlayer.getPawn3().equals(clickedCircle.getId())) {
                     System.out.println("Pawn3");
-                    getCircle(onTheMovePlayer.getPawn3()).setFill(Color.WHITE);
+                    getCircle("#" + onTheMovePlayer.getPawn3()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn3(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn4().equals("#" + clickedCircle.getId())) {
+                } else if (onTheMovePlayer.getPawn4().equals(clickedCircle.getId())) {
                     System.out.println("Pawn4");
-                    getCircle(onTheMovePlayer.getPawn4()).setFill(Color.WHITE);
+                    getCircle("#" + onTheMovePlayer.getPawn4()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn4(futureIdString);
                     getCircle("#" + onTheMovePlayer.getPawn4()).setFill(onTheMovePlayer.getColor());
                 }
             }
         }
+        System.out.println("I will move inside finish");
         return true;
     }
 
@@ -664,10 +667,10 @@ public class GameController implements Initializable {
         boolean pawn4Finish = false;
 
         String[] finishes = new String[4];
-        finishes[0] = "#" + onTheMovePlayer.getFinish1();
-        finishes[1] = "#" + onTheMovePlayer.getFinish2();
-        finishes[2] = "#" + onTheMovePlayer.getFinish3();
-        finishes[3] = "#" + onTheMovePlayer.getFinish4();
+        finishes[0] = onTheMovePlayer.getFinish1();
+        finishes[1] = onTheMovePlayer.getFinish2();
+        finishes[2] = onTheMovePlayer.getFinish3();
+        finishes[3] = onTheMovePlayer.getFinish4();
 
         for (int i = 0; i < finishes.length; i++) {
             if (finishes[i].equals(onTheMovePlayer.getPawn1())) {
@@ -701,9 +704,9 @@ public class GameController implements Initializable {
             System.out.println(onTheMovePlayer.getColorString() + " player is winner");
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("New Winner");
-            alert.setHeaderText("Winner is: " + onTheMovePlayer.getColorString());
-            alert.setContentText("I have a great message for you!");
+            alert.setTitle("Nový vítěz");
+            alert.setHeaderText("Vítěz je: " + onTheMovePlayer.getName());
+            alert.setContentText("Blahopřejeme vítězi");
 
             winnerListArea.getItems().add(onTheMovePlayer.getName());
             onTheMovePlayer.setIsWinner(true);
