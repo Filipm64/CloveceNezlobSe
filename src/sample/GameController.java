@@ -154,6 +154,8 @@ public class GameController implements Initializable {
                 resetPlayer.setPawn4(resetPlayer.getHome4());
                 getCircle("#" + resetPlayer.getHome4()).setFill(resetPlayer.getColor());
 
+                resetPlayer.setIsWinner(false);
+
                 printInfo(resetPlayer);
             }
 
@@ -345,7 +347,7 @@ public class GameController implements Initializable {
         System.out.println("Pawn2: " + printPlayer.getPawn2());
         System.out.println("Pawn3: " + printPlayer.getPawn3());
         System.out.println("Pawn4: " + printPlayer.getPawn4());
-        System.out.println("Start place: " + printPlayer.getStartPlace());
+        System.out.println(" Is winner: " + printPlayer.getIsWinner());
         System.out.println("*****************************");
     }
 
@@ -490,11 +492,11 @@ public class GameController implements Initializable {
                 if (onTheMoveIndex >= playersList.size()) {
                     onTheMoveIndex = 0;
                 }
-                System.out.println("I have to skip " + onTheMovePlayer.getName());
                 onTheMovePlayer = playersList.get(onTheMoveIndex);
 
                 if (bluePlayer.getIsWinner() && greenPlayer.getIsWinner() && redPlayer.getIsWinner() && yellowPlayer.getIsWinner()) {
-                    System.out.println("Everybody are in finish");
+                    textAreaInfo.appendText("Všichni hráči jsou v cíli \n");
+                    textAreaInfo.appendText("Hra končí \n");
                     return;
                 }
             }
@@ -529,12 +531,6 @@ public class GameController implements Initializable {
             futureIds[1] = null;
             futureIds[2] = null;
             futureIds[3] = null;
-
-            for (int x = 0; x < futureIds.length; x++) {
-                System.out.println("Pawn" + (x + 1) + " future id: " + futureIds[x]);
-            }
-
-
     }
 
     public boolean canMove() {
@@ -618,7 +614,7 @@ public class GameController implements Initializable {
                 //System.out.println("Last Id is: " + lastId);
                 //System.out.println("Future id will be: " + futureId);
                 if (lastId <= Integer.parseInt(onTheMovePlayer.getLastPlace()) && futureId >= Integer.parseInt(onTheMovePlayer.getStartPlace())) {
-                    //System.out.println("PAWN" + (i + 1) + " can go HOME");
+                    System.out.println("PAWN" + (i + 1) + " WILL GO HOME");
                     futureId = futureId - 1 - Integer.parseInt(onTheMovePlayer.getLastPlace());
                     //System.out.println("Future id: " + futureId);
                     if (futureId > 3) {
@@ -632,7 +628,7 @@ public class GameController implements Initializable {
                         for (int x = 0; x < 4; x++) {
                             System.out.println("FutureIdString: " + futureIdString);
                             System.out.println("pawns[x]: " + pawns[x]);
-                            if (futureIdString.equals(pawns[x])) {
+                            if (futureIdString.equals("#" + pawns[x])) {
                                 System.out.println("Pawn" + (i + 1) + " can not go home because there is a pawn ");
                                 canMovePawns[i] = false;
                             } else {
