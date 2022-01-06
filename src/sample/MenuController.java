@@ -9,8 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +36,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private Button startGameButton;
+
+    @FXML
+    private AnchorPane anchorBackground;
 
     @FXML
     private CheckBox blueBot;
@@ -96,6 +103,28 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            FileInputStream input = new FileInputStream("cubesBackground.jpg");
+
+            // create a image
+            Image image = new Image(input);
+
+            // create a background image
+            BackgroundImage backgroundimage = new BackgroundImage(image,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(2880, 1800, true, true, true, true));
+
+            // create Background
+            Background background = new Background(backgroundimage);
+            anchorBackground.setBackground(background);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
