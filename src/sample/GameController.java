@@ -75,7 +75,6 @@ public class GameController implements Initializable {
     @FXML
     private Button backToMenu;
 
-    private HraciPlocha hraciPlocha = new HraciPlocha();
 
     Player clickedPlayer;
     private Circle clickedCircle;
@@ -473,13 +472,7 @@ public class GameController implements Initializable {
             if (cube != 6) {
                 onTheMoveIndex++;
             } else {
-                /*
-                if(onTheMovePlayer.getIsWinner()){
-                    System.out.println(onTheMovePlayer.getName() + " is winner, onTheMovePlayer++");
-                    onTheMoveIndex++;
-                }
-                 */
-            }
+                            }
             if (onTheMoveIndex >= playersList.size()) {
                 onTheMoveIndex = 0;
             }
