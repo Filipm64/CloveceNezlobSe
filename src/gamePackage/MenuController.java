@@ -84,13 +84,7 @@ public class MenuController implements Initializable {
         menuStage.close();
 
         //Open game window
-        FXMLLoader fxmlloader = new FXMLLoader();
-        fxmlloader.setLocation(getClass().getResource("game.fxml"));
-        Scene scene = new Scene(fxmlloader.load());
-        Stage gameStage = new Stage();
-        gameStage.setScene(scene);
-        gameStage.setTitle("Človeče nezlob se HRACÍ DESKA");
-        gameStage.show();
+        loadFXML("game.fxml", "Člověče nezlob se HRACÍ PLOCHA");
 
     }
 

@@ -22,7 +22,6 @@ public class RulesController implements Initializable {
             Scanner reader = new Scanner(rulesFile);
             while (reader.hasNextLine()) {
                 String text = reader.nextLine();
-                System.out.println(text);
                 rulesArea.appendText(text);
             }
             reader.close();
@@ -30,5 +29,6 @@ public class RulesController implements Initializable {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        rulesArea.scrollTopProperty();
     }
 }
