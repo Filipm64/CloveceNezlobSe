@@ -1,4 +1,4 @@
-package sample;
+package gamePackage;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -196,8 +196,8 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            //cube = rd.nextInt(6) + 1;
-            cube = Integer.parseInt(cubeHack.getText());
+            cube = rd.nextInt(6) + 1;
+            //cube = Integer.parseInt(cubeHack.getText());
 
             button.setText("Hozeno: " + cube);
             cubePicture.setImage(images[cube - 1]);

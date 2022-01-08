@@ -1,6 +1,5 @@
-package sample;
+package gamePackage;
 
-import javafx.scene.Parent;
 import javafx.scene.paint.Paint;
 
 public class Player {

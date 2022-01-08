@@ -1,10 +1,9 @@
-package sample;
+package gamePackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -93,6 +92,22 @@ public class MenuController implements Initializable {
         gameStage.setTitle("Človeče nezlob se HRACÍ DESKA");
         gameStage.show();
 
+    }
+
+    @FXML
+    public void rulesButton(ActionEvent event) throws IOException {
+
+        loadFXML("rules.fxml", "Pravidla hry");
+    }
+
+    public void loadFXML(String fileName, String title) throws IOException {
+        FXMLLoader fxmlloader = new FXMLLoader();
+        fxmlloader.setLocation(getClass().getResource(fileName));
+        Scene scene = new Scene(fxmlloader.load());
+        Stage gameStage = new Stage();
+        gameStage.setScene(scene);
+        gameStage.setTitle(title);
+        gameStage.show();
     }
 
     public static String[] getNames(){

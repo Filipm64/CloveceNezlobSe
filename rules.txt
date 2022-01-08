@@ -1,0 +1,9 @@
+Cílem hry je dovést své figurky jedné barvy ze startovního pole do cílového domečku. To lze pouze tak, že figurka musí projít postupně všemi poli na obvodu hracího plánu. Každý hráč posune při svém tahu figurku o tolik bodů, kolik padlo při jeho hodu kostkou. Skončí-li s figurkou na políčku obsazeném cizí nebo sovu figurkou, je tato odstraněna ze hry a vrácena zpět do startovního domečku. 
+
+K nasazení figurky na startovní pole je potřeba hodit šestku. Pokud hráč hodí šestku nasadí figurku na startovní políčko.
+
+Pokud hráč při hře hodí šestku může nasadit novou figurku na startovní pole nebo pohnout o šest již nasazenou figurkou. Když hráč hodí šest hraje ještě jednou.
+
+Jestliže nemá hráč jak pohnout hraje další hráč.
+
+Vyhrává ten hráč, který první oběhne hrací plán všemi svými figurkami a umístí je do cílového domečku. Ostatní hráči poté pokračují ve hře a hrají tak o další pořadí.
