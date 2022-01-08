@@ -149,7 +149,6 @@
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin></Circle>
-      <Button fx:id="button" mnemonicParsing="false" onAction="#buttonCube" text="Kostka" GridPane.columnIndex="9" GridPane.rowIndex="3" />
       <Circle id="redH-2" fill="RED" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
       <Circle id="redH-3" fill="RED" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
       <Circle id="greenH-1" fill="#70f109" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
@@ -194,11 +193,10 @@
       <Circle id="37" fill="#1f93ff00" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
       <Circle id="38" fill="#1f93ff00" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
       <Circle id="39" fill="#1f93ff00" onMouseClicked="#handle" radius="24.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-      <Label fx:id="playerOnTheMoveLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="165.0" text="HracNaTahu" GridPane.columnIndex="5">
+      <Label fx:id="playerOnTheMoveLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="144.0" text="HracNaTahu" GridPane.columnIndex="5">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ImageView fx:id="cubePicture" fitHeight="112.0" fitWidth="149.0" onMouseClicked="#buttonCube" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
       <Label fx:id="blueName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="152.0" text="Player modry" textFill="BLUE">
          <font>
             <Font size="24.0" />
@@ -231,11 +229,12 @@
             <Font size="14.0" />
          </font>
       </Label>
+         <ImageView fx:id="imageInfo" fitHeight="55.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" />
    </children>
 </GridPane>
 <TextArea fx:id="textAreaInfo" editable="false" layoutX="902.0" layoutY="395.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="187.0" />
-   <ListView fx:id="winnerListArea" layoutX="985.0" layoutY="200.0" prefHeight="95.0" prefWidth="166.0" visible="false" AnchorPane.rightAnchor="20.0" />
-   <Label fx:id="winnerListTitle" layoutX="900.0" layoutY="147.0" text="Tabulka výtězů:" visible="false">
+   <ListView fx:id="winnerListArea" layoutX="901.0" layoutY="59.0" prefHeight="95.0" prefWidth="166.0" AnchorPane.rightAnchor="23.59999999999991" />
+   <Label fx:id="winnerListTitle" layoutX="903.0" layoutY="24.0" text="Tabulka výtězů:">
       <font>
          <Font size="24.0" />
       </font></Label>
@@ -251,4 +250,5 @@
       </font>
    </Label>
    <CheckBox fx:id="checkInfo" layoutX="920.0" layoutY="530.0" mnemonicParsing="false" onAction="#showHideInfo" selected="true" text="Zobrazit info" />
+<ImageView fx:id="cubePicture" fitHeight="130.0" fitWidth="130.0" layoutX="931.0" layoutY="192.0" onMouseClicked="#buttonCube" pickOnBounds="true" preserveRatio="true" />
 </AnchorPane>

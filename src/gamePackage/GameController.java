@@ -18,21 +18,21 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class GameController implements Initializable {
 
     @FXML
     private GridPane gridPane;
-
-    @FXML
-    private Button button;
 
     @FXML
     private Label playerOnTheMoveLabel;
@@ -42,6 +42,9 @@ public class GameController implements Initializable {
 
     @FXML
     private ImageView cubePicture;
+
+    @FXML
+    private ImageView imageInfo;
 
     @FXML
     private Label blueName;
@@ -94,6 +97,9 @@ public class GameController implements Initializable {
 
     ArrayList<Player> playersList;
     Image[] images = new Image[6];
+
+    Image[] pawnsImage = new Image[4];
+    Image cubeInfoImage;
 
     @FXML
     public void showHideInfo() {
@@ -160,6 +166,10 @@ public class GameController implements Initializable {
             onTheMovePlayer = null;
             changePlayerOnTheMove();
 
+            winnerListArea.setVisible(false);
+            winnerListTitle.setVisible(false);
+            winnerListArea.getItems().removeAll();
+
             System.out.println("Reset end");
         }
     }
@@ -193,13 +203,17 @@ public class GameController implements Initializable {
     public void buttonCube() throws InterruptedException {
         System.out.println("buttonCube()");
 
+        if(onTheMovePlayer == bluePlayer){imageInfo.setImage(pawnsImage[0]);}
+        else if(onTheMovePlayer == greenPlayer){imageInfo.setImage(pawnsImage[1]);}
+        else if(onTheMovePlayer == redPlayer){imageInfo.setImage(pawnsImage[2]);}
+        else{imageInfo.setImage(pawnsImage[3]);}
+
         Random rd = new Random();
 
         if (!cubeThrown) {
             cube = rd.nextInt(6) + 1;
             //cube = Integer.parseInt(cubeHack.getText());
 
-            button.setText("Hozeno: " + cube);
             cubePicture.setImage(images[cube - 1]);
             cubeThrown = true;
 
@@ -212,6 +226,7 @@ public class GameController implements Initializable {
         } else {
             System.out.println("You can throw cube just once!");
         }
+
     }
 
     @FXML
@@ -488,19 +503,24 @@ public class GameController implements Initializable {
                 if (bluePlayer.getIsWinner() && greenPlayer.getIsWinner() && redPlayer.getIsWinner() && yellowPlayer.getIsWinner()) {
                     textAreaInfo.appendText("Všichni hráči jsou v cíli \n");
                     textAreaInfo.appendText("Hra končí \n");
+                    onTheMovePlayer = null;
                     return;
                 }
             }
+
         }
         playerOnTheMoveLabel.setText(onTheMovePlayer.getName());
         playerOnTheMoveLabel.setTextFill(onTheMovePlayer.getColor());
         textAreaInfo.appendText("NYNÍ HRAJE  " + onTheMovePlayer.getName() + "\n");
         textAreaInfo.appendText(onTheMovePlayer.getName() + " hoď kostkou \n");
         cubeThrown = false;
-
+        imageInfo.setImage(cubeInfoImage);
+/*
         if (onTheMovePlayer.getIsBot()) {
             playBot();
         }
+        */
+
     }
 
     public void playBot() throws InterruptedException {
@@ -712,6 +732,9 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        winnerListArea.setVisible(false);
+        winnerListTitle.setVisible(false);
+
         String[] playersNames = MenuController.getNames();
         boolean[] playersBots = MenuController.getBots();
 
@@ -722,6 +745,12 @@ public class GameController implements Initializable {
             images[3] = new Image(new FileInputStream("4.PNG"));
             images[4] = new Image(new FileInputStream("5.PNG"));
             images[5] = new Image(new FileInputStream("6.PNG"));
+            pawnsImage[0] = new Image(new FileInputStream("bluePawn.png"));
+            pawnsImage[1] = new Image(new FileInputStream("greenPawn.png"));
+            pawnsImage[2] = new Image(new FileInputStream("redPawn.png"));
+            pawnsImage[3] = new Image(new FileInputStream("yellowPawn.png"));
+            cubeInfoImage = new Image(new FileInputStream("cube.png"));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -758,5 +787,7 @@ public class GameController implements Initializable {
         greenName.setText(greenPlayer.getName());
         redName.setText(redPlayer.getName());
         yellowName.setText(yellowPlayer.getName());
+
+
     }
 }
