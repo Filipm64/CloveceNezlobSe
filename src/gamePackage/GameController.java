@@ -211,8 +211,8 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            cube = rd.nextInt(6) + 1;
-            //cube = Integer.parseInt(cubeHack.getText());
+            //cube = rd.nextInt(6) + 1;
+            cube = Integer.parseInt(cubeHack.getText());
 
             cubePicture.setImage(images[cube - 1]);
             cubeThrown = true;
@@ -485,7 +485,9 @@ public class GameController implements Initializable {
             if (cube != 6) {
                 onTheMoveIndex++;
             } else {
-                            }
+                System.out.println("cube = 6 |");
+                // kontrola zda si budu moct pohnout v budoucnu
+            }
             if (onTheMoveIndex >= playersList.size()) {
                 onTheMoveIndex = 0;
             }
