@@ -211,13 +211,13 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            //cube = rd.nextInt(6) + 1;
-            cube = Integer.parseInt(cubeHack.getText());
+            cube = rd.nextInt(6) + 1;
+            //cube = Integer.parseInt(cubeHack.getText());
 
             cubePicture.setImage(images[cube - 1]);
             cubeThrown = true;
 
-            if (!canMove()) {
+            if (!canMove(cube)) {
                 textAreaInfo.appendText(onTheMovePlayer.getName() + " nemáš jak pohnout \n");
                 changePlayerOnTheMove();
             } else {
@@ -237,8 +237,11 @@ public class GameController implements Initializable {
             textAreaInfo.appendText(onTheMovePlayer.getName() + " musíš hodit kostkou \n");
             return;
         }
+        cubeThrown = false;
+
         clickedCircle = (Circle) mouseEvent.getSource();
         clickedPawn(clickedCircle);
+
     }
 
     public void clickedPawn(Circle circle) throws InterruptedException {
@@ -283,7 +286,9 @@ public class GameController implements Initializable {
 
             } else if (Integer.parseInt(clickedCircle.getId()) >= 0) {
                 //System.out.println("clickedCircle >= 0, I will MOVE");
-                movePawn();
+                if(!movePawn()){
+                    return;
+                }
             } else {
                 //System.out.println("Nothing is good error is in the if (respawn/move)");
             }
@@ -363,7 +368,7 @@ public class GameController implements Initializable {
         System.out.println("*****************************");
     }
 
-    public void movePawn() {
+    public boolean movePawn() {
         System.out.println("movePawn()");
         String lastId = clickedCircle.getId();
         int futureId = Integer.parseInt(lastId) + cube;
@@ -374,7 +379,9 @@ public class GameController implements Initializable {
 
         if (futureId > Integer.parseInt(clickedPlayer.getLastPlace()) && Integer.parseInt(lastId) <= Integer.parseInt(clickedPlayer.getLastPlace()) &&
                 Integer.parseInt(lastId) > (Integer.parseInt(clickedPlayer.getLastPlace()) - 10)) {
-            goHome();
+            if(!goHome()){
+                return false;
+            }
         } else {
 
             checkTaking(String.valueOf(futureId));
@@ -383,14 +390,14 @@ public class GameController implements Initializable {
             getCircle("#" + clickedCircle.getId()).setFill(colorWhite);
             getCircle("#" + futureId).setFill(clickedPlayer.getColor());
         }
-        //changePlayerOnTheMove();
+        return true;
     }
 
-    public void goHome() {
+    public boolean goHome() {
         System.out.println("goHome()");
         String lastId = clickedCircle.getId();
         int futureId = Integer.parseInt(lastId) + (cube - 1) - Integer.parseInt(clickedPlayer.getLastPlace()); // CUBE!!
-        String futureIdString = "#" + clickedPlayer.getColorString() + "F-" + futureId;
+        String futureIdString = clickedPlayer.getColorString() + "F-" + futureId;
         String futureIdStringSave = clickedPlayer.getColorString() + "F-" + futureId;
 
         if (futureId > 3) {
@@ -399,14 +406,17 @@ public class GameController implements Initializable {
             if (clickedPlayer.getPawn1().equals(futureIdString) || clickedPlayer.getPawn2().equals(futureIdString) ||
                     clickedPlayer.getPawn3().equals(futureIdString) || clickedPlayer.getPawn4().equals(futureIdString)) {
                 //place is occupied
+                System.out.println("The home is already occupied this pawn can not move");
+                return false;
             } else {
                 //going home
                 clickedCircle.setFill(colorWhite);
-                getCircle(futureIdString).setFill(clickedPlayer.getColor());
+                getCircle("#" + futureIdString).setFill(clickedPlayer.getColor());
                 changeId(lastId, futureIdStringSave);
             }
         }
         checkWinner();
+        return true;
     }
 
     public void checkTaking(String futureId) {
@@ -485,8 +495,28 @@ public class GameController implements Initializable {
             if (cube != 6) {
                 onTheMoveIndex++;
             } else {
-                System.out.println("cube = 6 |");
-                // kontrola zda si budu moct pohnout v budoucnu
+                System.out.println("cube = 6 I will check canMoveFuture()");
+
+
+                boolean testcanMove = canMove(cube);
+                boolean testcanMoveFuture = canMoveFuture();
+                boolean testCubeThrow = cubeThrown;
+
+
+                if(canMove(cube) && cubeThrown){
+                    // index is the same
+                    System.out.println("canMove and cubeThrown - will play again");
+                }else if(!canMove(cube) && cubeThrown){
+                    onTheMoveIndex++;
+                    System.out.println("can not move and cubeThrow");
+                }else if(!cubeThrown && canMoveFuture()){
+                    System.out.println("did not throw the bube and can move in future - will play again");
+                }
+
+                System.out.println("can player move: " + testcanMove);
+                System.out.println("can move in future: " + testcanMoveFuture);
+                System.out.println("Cube thrown: " + testCubeThrow);
+
             }
             if (onTheMoveIndex >= playersList.size()) {
                 onTheMoveIndex = 0;
@@ -525,12 +555,23 @@ public class GameController implements Initializable {
 
     }
 
+    public boolean canMoveFuture(){
+        if(canMove(1) || canMove(2) || canMove(3) ||
+                canMove(4) || canMove(5) || canMove(6)){
+            System.out.println("In future he can move canMoveFuture()");
+            return true;
+        }else{
+            System.out.println("In future he can not move");
+            return false;
+        }
+    }
+
     public void playBot() throws InterruptedException {
         System.out.println("playBot()");
 
         buttonCube();
 
-        if(canMove()){
+        if(canMove(cube)){
             //clickedPawn(getCircle(onTheMovePlayer.getPawn1()));
         }
             String[] pawns = new String[4];
@@ -546,7 +587,7 @@ public class GameController implements Initializable {
             futureIds[3] = null;
     }
 
-    public boolean canMove() {
+    public boolean canMove(int actualCube) {
         System.out.println("canMove()");
         String[] finishes = new String[4];
         finishes[0] = "#" + onTheMovePlayer.getFinish1();
@@ -588,7 +629,7 @@ public class GameController implements Initializable {
             System.out.println("Finish3: " + finishes[3]);
 
             if (actualPawn == homes[i]) { // if pawn is in home (cube is 6 = can move, else can not move
-                if (cube == 6) {
+                if (actualCube == 6) {
                     //System.out.println("PAWN" + (i + 1) + " is home and cube is 6");
                     canMovePawns[i] = true;
                 } else {
@@ -603,7 +644,7 @@ public class GameController implements Initializable {
                 //System.out.println("Split id1: " + splitId[0]);
                 //System.out.println("Split id2: " + splitId[1]);
                 int idInt = Integer.parseInt(splitId[1]);
-                int futureIntId = idInt + cube;
+                int futureIntId = idInt + actualCube;
                 String futureIdString = splitId[0] + "-" + futureIntId;
 
                 if (futureIntId > 3) {
@@ -623,7 +664,7 @@ public class GameController implements Initializable {
                 System.out.println("Pawn " + (i + 1) + " is not in finish");
                 System.out.println("LastId: " + actualPawn);
                 int lastId = Integer.parseInt(actualPawn);
-                int futureId = Integer.parseInt(actualPawn) + cube;
+                int futureId = Integer.parseInt(actualPawn) + actualCube;
                 //System.out.println("Last Id is: " + lastId);
                 //System.out.println("Future id will be: " + futureId);
                 if (lastId <= Integer.parseInt(onTheMovePlayer.getLastPlace()) && futureId >= Integer.parseInt(onTheMovePlayer.getStartPlace())) {
@@ -653,6 +694,7 @@ public class GameController implements Initializable {
                 }
             }
         }
+        System.out.println("Cube is: " + actualCube);
         System.out.println("Pawn1 can move: " + canMovePawns[0]);
         System.out.println("Pawn2 can move: " + canMovePawns[1]);
         System.out.println("Pawn3 can move: " + canMovePawns[2]);
@@ -789,7 +831,5 @@ public class GameController implements Initializable {
         greenName.setText(greenPlayer.getName());
         redName.setText(redPlayer.getName());
         yellowName.setText(yellowPlayer.getName());
-
-
     }
 }
