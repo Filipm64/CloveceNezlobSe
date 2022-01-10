@@ -238,13 +238,18 @@ public class GameController implements Initializable {
             textAreaInfo.appendText(onTheMovePlayer.getName() + " musíš hodit kostkou \n");
             return;
         }
-        cubeThrown = false;
+
+
 
         clickedCircle = (Circle) mouseEvent.getSource();
-        clickedPawn(clickedCircle);
+        if(!clickedPawn(clickedCircle)){
+            return;
+        }
+        System.out.println("End of handle");
+        cubeThrown = false;
     }
 
-    public void clickedPawn(Circle circle) throws InterruptedException {
+    public boolean clickedPawn(Circle circle) throws InterruptedException {
         System.out.println("clickedPawn()");
         clickedCircle = circle;
 
@@ -258,30 +263,32 @@ public class GameController implements Initializable {
         } else if (colorYellow.equals(clickedCircle.getFill())) {
             clickedPlayer = yellowPlayer;
         } else {
-            return;
+            return false;
         }
         // ten kdo kliknul a hráč který má být zrovna na tahu(onTheMove) bude hrát
         if (clickedPlayer == onTheMovePlayer) {
             if (clickedCircle.getId().equals(clickedPlayer.getHome1()) || clickedCircle.getId().equals(clickedPlayer.getHome2()) ||
                     clickedCircle.getId().equals(clickedPlayer.getHome3()) || clickedCircle.getId().equals(clickedPlayer.getHome4())) {
+                System.out.println("The pawn you clicked is in home");
                 if (cube == 6) {
                     respawn(clickedCircle, clickedPlayer);
-                } else { return; }
+                } else { return false; }
             } else if (clickedCircle.getId().equals(clickedPlayer.getFinish1()) || clickedCircle.getId().equals(clickedPlayer.getFinish2()) ||
                     clickedCircle.getId().equals(clickedPlayer.getFinish3()) || clickedCircle.getId().equals(clickedPlayer.getFinish4())) {
                 if (!moveInsideFinish()) {
-                    return;
+                    return false;
                 }
             } else if (Integer.parseInt(clickedCircle.getId()) >= 0) {
                 if(!movePawn()){
-                    return;
+                    return false;
                 }
             }
         } else {
             //This player is not on the move
-            return;
+            return false;
         }
         changePlayerOnTheMove();
+        return true;
     }
 
     public boolean moveInsideFinish() {
