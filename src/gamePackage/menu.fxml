@@ -10,7 +10,7 @@
          <font>
             <Font name="System Bold" size="36.0" />
          </font></Label>
-      <Button fx:id="startGameButton" layoutX="236.0" layoutY="306.0" mnemonicParsing="false" onAction="#startGame" prefHeight="54.0" prefWidth="127.0" style="-fx-border-color: #35b0c6; -fx-border-radius: 25; -fx-background-radius: 25;" text="Start game">
+      <Button fx:id="startGameButton" layoutX="236.0" layoutY="306.0" mnemonicParsing="false" onAction="#startGame" prefHeight="54.0" prefWidth="127.0" style="-fx-border-color: #35b0c6; -fx-border-radius: 25; -fx-background-radius: 25;" text="Spustit hru">
          <font>
             <Font size="18.0" />
          </font></Button>

@@ -536,6 +536,8 @@ public class GameController implements Initializable {
                     textAreaInfo.appendText("Všichni hráči jsou v cíli \n");
                     textAreaInfo.appendText("Hra končí \n");
                     onTheMovePlayer = null;
+                    Alert endGame = new Alert(Alert.AlertType.INFORMATION, "Hra končí. Všichi hráči došli do cíle", ButtonType.YES);
+                    endGame.showAndWait();
                     return;
                 }
             }
