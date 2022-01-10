@@ -114,6 +114,18 @@ public class GameController implements Initializable {
     }
 
     @FXML
+    public void showRules(ActionEvent event) throws IOException {
+        System.out.println("showRules()");
+        FXMLLoader fxmlloader = new FXMLLoader();
+        fxmlloader.setLocation(getClass().getResource("rules.fxml"));
+        Scene scene = new Scene(fxmlloader.load());
+        Stage gameStage = new Stage();
+        gameStage.setScene(scene);
+        gameStage.setTitle("Pravidla hry");
+        gameStage.show();
+    }
+
+    @FXML
     public void buttonExit(ActionEvent event) {
 
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Doopravdy chceš odejít? Hra bude smazána", ButtonType.YES, ButtonType.NO);
@@ -132,7 +144,6 @@ public class GameController implements Initializable {
         exitAlert.showAndWait();
 
         if (exitAlert.getResult() == ButtonType.YES) {
-            System.out.println("Resetting game...");
 
             Player[] playersToReset = new Player[4];
             playersToReset[0] = bluePlayer;
@@ -158,8 +169,6 @@ public class GameController implements Initializable {
                 getCircle("#" + resetPlayer.getHome4()).setFill(resetPlayer.getColor());
 
                 resetPlayer.setIsWinner(false);
-
-                printInfo(resetPlayer);
             }
 
             textAreaInfo.clear();
@@ -169,8 +178,6 @@ public class GameController implements Initializable {
             winnerListArea.setVisible(false);
             winnerListTitle.setVisible(false);
             winnerListArea.getItems().removeAll();
-
-            System.out.println("Reset end");
         }
     }
 
@@ -183,9 +190,6 @@ public class GameController implements Initializable {
         backToMenuAlert.showAndWait();
 
         if (backToMenuAlert.getResult() == ButtonType.YES) {
-
-            System.out.println("Confirmed back to menu");
-
             Stage gameStage = (Stage) backToMenu.getScene().getWindow();
             gameStage.close();
 
@@ -211,8 +215,8 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            cube = rd.nextInt(6) + 1;
-            //cube = Integer.parseInt(cubeHack.getText());
+            //cube = rd.nextInt(6) + 1;
+            cube = Integer.parseInt(cubeHack.getText());
 
             cubePicture.setImage(images[cube - 1]);
             cubeThrown = true;
@@ -223,10 +227,7 @@ public class GameController implements Initializable {
             } else {
                 textAreaInfo.appendText(onTheMovePlayer.getName() + " pohni figurkou\n");
             }
-        } else {
-            System.out.println("You can throw cube just once!");
-        }
-
+        } else { System.out.println("You can throw cube just once!");}
     }
 
     @FXML
@@ -241,7 +242,6 @@ public class GameController implements Initializable {
 
         clickedCircle = (Circle) mouseEvent.getSource();
         clickedPawn(clickedCircle);
-
     }
 
     public void clickedPawn(Circle circle) throws InterruptedException {
@@ -260,46 +260,28 @@ public class GameController implements Initializable {
         } else {
             return;
         }
-
-
         // ten kdo kliknul a hráč který má být zrovna na tahu(onTheMove) bude hrát
         if (clickedPlayer == onTheMovePlayer) {
-            //System.out.println("Now will play " + clickedPlayer.getName());
-            //System.out.println(clickedPlayer.getColor() + "H-1");
             if (clickedCircle.getId().equals(clickedPlayer.getHome1()) || clickedCircle.getId().equals(clickedPlayer.getHome2()) ||
                     clickedCircle.getId().equals(clickedPlayer.getHome3()) || clickedCircle.getId().equals(clickedPlayer.getHome4())) {
-                //System.out.println("Kliknul jsi na pole domečku");
                 if (cube == 6) {
-                    //System.out.println("Proběhne respawn");
                     respawn(clickedCircle, clickedPlayer);
-                } else {
-                    //System.out.println("Cube is not six, you wont go anywhere");
-                    return;
-                }
-
+                } else { return; }
             } else if (clickedCircle.getId().equals(clickedPlayer.getFinish1()) || clickedCircle.getId().equals(clickedPlayer.getFinish2()) ||
                     clickedCircle.getId().equals(clickedPlayer.getFinish3()) || clickedCircle.getId().equals(clickedPlayer.getFinish4())) {
-                //System.out.println("MOVE INSIDE THE FINISH");
                 if (!moveInsideFinish()) {
                     return;
                 }
-
             } else if (Integer.parseInt(clickedCircle.getId()) >= 0) {
-                //System.out.println("clickedCircle >= 0, I will MOVE");
                 if(!movePawn()){
                     return;
                 }
-            } else {
-                //System.out.println("Nothing is good error is in the if (respawn/move)");
             }
         } else {
-            //System.out.println("He is not on the move");
+            //This player is not on the move
             return;
         }
-        //printInfo(clickedPlayer);
-
         changePlayerOnTheMove();
-
     }
 
     public boolean moveInsideFinish() {
@@ -316,44 +298,32 @@ public class GameController implements Initializable {
         int futureId = numberId + cube;
         String futureIdString = idSplit[0] + "-" + futureId;
 
-        if (futureId > 3) {
-            System.out.println("I can not move I will be out");
-            return false;
-        }
+        if (futureId > 3) { return false; } // if is out of home
 
         for (int i = 0; i < 4; i++) {
-
-
-            if (("#" + futureIdString).equals(pawns[i])) {
-                System.out.println("I can not move on my future circle is someone");
-                return false;
+            if (("#" + futureIdString).equals(pawns[i])) { return false; //home is occupied
             } else {
 
-                if (onTheMovePlayer.getPawn1().equals(clickedCircle.getId())) {
-                    System.out.println("Pawn1");
+                if (onTheMovePlayer.getPawn1().equals(clickedCircle.getId())) { //pawn1
                     getCircle("#" + onTheMovePlayer.getPawn1()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn1(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn2().equals(clickedCircle.getId())) {
-                    System.out.println("Pawn2");
+                } else if (onTheMovePlayer.getPawn2().equals(clickedCircle.getId())) { //pawn2
                     getCircle("#" + onTheMovePlayer.getPawn2()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn2(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn3().equals(clickedCircle.getId())) {
-                    System.out.println("Pawn3");
+                } else if (onTheMovePlayer.getPawn3().equals(clickedCircle.getId())) { //pawn3
                     getCircle("#" + onTheMovePlayer.getPawn3()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn3(futureIdString);
                     getCircle("#" + futureIdString).setFill(onTheMovePlayer.getColor());
-                } else if (onTheMovePlayer.getPawn4().equals(clickedCircle.getId())) {
-                    System.out.println("Pawn4");
+                } else if (onTheMovePlayer.getPawn4().equals(clickedCircle.getId())) { //pawn4
                     getCircle("#" + onTheMovePlayer.getPawn4()).setFill(Color.WHITE);
                     onTheMovePlayer.setPawn4(futureIdString);
                     getCircle("#" + onTheMovePlayer.getPawn4()).setFill(onTheMovePlayer.getColor());
                 }
             }
         }
-        System.out.println("I will move inside finish");
-        return true;
+        return true; //can move inside home
     }
 
     public void printInfo(Player printPlayer) {
@@ -379,13 +349,9 @@ public class GameController implements Initializable {
 
         if (futureId > Integer.parseInt(clickedPlayer.getLastPlace()) && Integer.parseInt(lastId) <= Integer.parseInt(clickedPlayer.getLastPlace()) &&
                 Integer.parseInt(lastId) > (Integer.parseInt(clickedPlayer.getLastPlace()) - 10)) {
-            if(!goHome()){
-                return false;
-            }
+            if(!goHome()){ return false; }
         } else {
-
             checkTaking(String.valueOf(futureId));
-
             changeId(lastId, String.valueOf(futureId));
             getCircle("#" + clickedCircle.getId()).setFill(colorWhite);
             getCircle("#" + futureId).setFill(clickedPlayer.getColor());
@@ -402,6 +368,7 @@ public class GameController implements Initializable {
 
         if (futureId > 3) {
             //System.out.println("I am out of the home");
+            return false;
         } else {
             if (clickedPlayer.getPawn1().equals(futureIdString) || clickedPlayer.getPawn2().equals(futureIdString) ||
                     clickedPlayer.getPawn3().equals(futureIdString) || clickedPlayer.getPawn4().equals(futureIdString)) {
