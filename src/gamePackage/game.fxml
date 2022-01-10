@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="701.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gamePackage.GameController">
+<AnchorPane prefHeight="701.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gamePackage.GameController">
 <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="940.0" AnchorPane.topAnchor="0.0">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="70.0" />
@@ -234,7 +234,7 @@
 </GridPane>
 <TextArea fx:id="textAreaInfo" editable="false" layoutX="902.0" layoutY="395.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="187.0" />
    <ListView fx:id="winnerListArea" layoutX="901.0" layoutY="59.0" prefHeight="95.0" prefWidth="166.0" AnchorPane.rightAnchor="23.59999999999991" />
-   <Label fx:id="winnerListTitle" layoutX="903.0" layoutY="24.0" text="Tabulka výtězů:">
+   <Label fx:id="winnerListTitle" layoutX="903.0" layoutY="24.0" text="Tabulka vítězů:">
       <font>
          <Font size="24.0" />
       </font></Label>
