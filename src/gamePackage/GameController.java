@@ -455,22 +455,12 @@ public class GameController implements Initializable {
             if (cube != 6) {
                 onTheMoveIndex++;
             } else {
-                boolean testcanMove = canMove(cube);
-                boolean testcanMoveFuture = canMoveFuture();
-                boolean testCubeThrow = cubeThrown;
-
 
                 if(canMove(cube) && cubeThrown){
                     // player will play again
                 }else if(!canMove(cube) && cubeThrown){
                     onTheMoveIndex++;
-                }else if(!cubeThrown && canMoveFuture()){
                 }
-
-                System.out.println("can player move: " + testcanMove);
-                System.out.println("can move in future: " + testcanMoveFuture);
-                System.out.println("Cube thrown: " + testCubeThrow);
-
             }
             if (onTheMoveIndex >= playersList.size()) {
                 onTheMoveIndex = 0;
@@ -575,15 +565,6 @@ public class GameController implements Initializable {
             actualPawn = pawns[i];
             actualPawn = actualPawn.replace(" ", "");
 
-            System.out.println("PAWN0: " + pawns[0]);
-            System.out.println("PAWN1: " + pawns[1]);
-            System.out.println("PAWN2: " + pawns[2]);
-            System.out.println("PAWN3: " + pawns[3]);
-            System.out.println("Finish0: " + finishes[0]);
-            System.out.println("Finish1: " + finishes[1]);
-            System.out.println("Finish2: " + finishes[2]);
-            System.out.println("Finish3: " + finishes[3]);
-
             if (actualPawn == homes[i]) { // if pawn is in home (cube is 6 = can move, else can not move
                 if (actualCube == 6) {
                     //System.out.println("PAWN" + (i + 1) + " is home and cube is 6");
@@ -593,12 +574,8 @@ public class GameController implements Initializable {
                     canMovePawns[i] = false;
                 }
             } else if (("#" + actualPawn).equals(finishes[0]) || ("#" + actualPawn).equals(finishes[1]) || ("#" + actualPawn).equals(finishes[2]) || ("#" + actualPawn).equals(finishes[3])) {
-                //System.out.println("Inside finish******************************************");
                 System.out.println("PAWN" + (i + 1) + " is in finish");
-                // hear will be the function to move even if you are in home
                 String[] splitId = pawns[i].split("-");
-                //System.out.println("Split id1: " + splitId[0]);
-                //System.out.println("Split id2: " + splitId[1]);
                 int idInt = Integer.parseInt(splitId[1]);
                 int futureIntId = idInt + actualCube;
                 String futureIdString = splitId[0] + "-" + futureIntId;
@@ -608,59 +585,34 @@ public class GameController implements Initializable {
                 } else {
                     //check if future position is occupied
                     for (int x = 0; x < 4; x++) {
-                        //System.out.println("Check if future circle is occupied:");
-                        //System.out.println("FutureIdString: " + futureIdString);
-                        //System.out.println("Pawns[x]: " + pawns[x]);
                         if (futureIdString.equals(pawns[x])) {
                             canMovePawns[i] = false;
                         }
                     }
                 }
             } else {
-                System.out.println("Pawn " + (i + 1) + " is not in finish");
-                System.out.println("LastId: " + actualPawn);
                 int lastId = Integer.parseInt(actualPawn);
                 int futureId = Integer.parseInt(actualPawn) + actualCube;
-                //System.out.println("Last Id is: " + lastId);
-                //System.out.println("Future id will be: " + futureId);
                 if (lastId <= Integer.parseInt(onTheMovePlayer.getLastPlace()) && futureId >= Integer.parseInt(onTheMovePlayer.getStartPlace())) {
-                    System.out.println("PAWN" + (i + 1) + " WILL GO HOME");
                     futureId = futureId - 1 - Integer.parseInt(onTheMovePlayer.getLastPlace());
-                    //System.out.println("Future id: " + futureId);
                     if (futureId > 3) {
                         canMovePawns[i] = false;
-                        //System.out.println("Pawn" + (i + 1) + " is out of the home");
                     } else {
                         String futureIdString = "#" + onTheMovePlayer.getFinishText() + futureId;
-                        //System.out.println("Future id in home is: " + futureIdString);
 
-                        //System.out.println("CHECK IF FINISH IS OCCUPIED");
                         for (int x = 0; x < 4; x++) {
-                            System.out.println("FutureIdString: " + futureIdString);
-                            System.out.println("pawns[x]: " + pawns[x]);
                             if (futureIdString.equals("#" + pawns[x])) {
-                                System.out.println("Pawn" + (i + 1) + " can not go home because there is a pawn ");
                                 canMovePawns[i] = false;
-                            } else {
-                                System.out.println("Pawn" + (i + 1) + " can go home because there not a pawn ");
                             }
                         }
                     }
-
                 }
             }
         }
-        System.out.println("Cube is: " + actualCube);
-        System.out.println("Pawn1 can move: " + canMovePawns[0]);
-        System.out.println("Pawn2 can move: " + canMovePawns[1]);
-        System.out.println("Pawn3 can move: " + canMovePawns[2]);
-        System.out.println("Pawn4 can move: " + canMovePawns[3]);
 
         if (canMovePawns[0] || canMovePawns[1] || canMovePawns[2] || canMovePawns[3]) {
-            System.out.println("canMove()true");
             return true;
         } else {
-            System.out.println("canMove() false");
             return false;
         }
     }
@@ -708,8 +660,6 @@ public class GameController implements Initializable {
             winnerListArea.setVisible(true);
             winnerListTitle.setVisible(true);
 
-            System.out.println(onTheMovePlayer.getColorString() + " player is winner");
-
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nový vítěz");
             alert.setHeaderText("Vítěz je: " + onTheMovePlayer.getName());
@@ -756,7 +706,6 @@ public class GameController implements Initializable {
         }
 
         cubePicture.setImage(images[0]);
-
         playersList = new ArrayList<>();
 
         bluePlayer = new Player(playersNames[0], colorBlue, "0", "blueH-1", "blueH-2", "blueH-3", "blueH-4",
