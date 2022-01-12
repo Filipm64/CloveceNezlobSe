@@ -114,6 +114,11 @@ public class GameController implements Initializable {
     }
 
     @FXML
+    private void showAdvice(ActionEvent event){
+
+    }
+
+    @FXML
     public void showRules(ActionEvent event) throws IOException {
         System.out.println("showRules()");
         FXMLLoader fxmlloader = new FXMLLoader();

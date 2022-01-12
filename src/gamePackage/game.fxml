@@ -256,5 +256,6 @@
    </Label>
    <CheckBox fx:id="checkInfo" layoutX="920.0" layoutY="530.0" mnemonicParsing="false" onAction="#showHideInfo" selected="true" text="Zobrazit info" />
 <ImageView fx:id="cubePicture" fitHeight="130.0" fitWidth="130.0" layoutX="931.0" layoutY="192.0" onMouseClicked="#buttonCube" pickOnBounds="true" preserveRatio="true" />
-   <Button layoutX="932.0" layoutY="623.0" mnemonicParsing="false" onAction="#showRules" text="Zobrazit pravidla" />
+   <Button layoutX="901.0" layoutY="623.0" mnemonicParsing="false" onAction="#showRules" prefHeight="26.0" prefWidth="83.0" text="Pravidla hry" />
+   <Button layoutX="989.0" layoutY="624.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Nápověda" />
 </AnchorPane>

@@ -29,6 +29,5 @@ public class RulesController implements Initializable {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        rulesArea.scrollTopProperty();
     }
 }
