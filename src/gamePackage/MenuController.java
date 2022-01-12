@@ -5,9 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -67,6 +65,12 @@ public class MenuController implements Initializable {
         greenPlayer = greenName.getText();
         redPlayer = redName.getText();
         yellowPlayer = yellowName.getText();
+
+        if(bluePlayer.equals("") || greenPlayer.equals("") || redPlayer.equals("") || yellowPlayer.equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Nezadali jste jména/přezdívky všech hráčů", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
 
         MenuController.names[0] = bluePlayer;
         MenuController.names[1] = greenPlayer;
