@@ -39,5 +39,6 @@
       <CheckBox fx:id="redBot" layoutX="410.0" layoutY="198.0" mnemonicParsing="false" text="Bot" visible="false" />
       <CheckBox fx:id="yellowBot" layoutX="410.0" layoutY="245.0" mnemonicParsing="false" text="Bot" visible="false" />
       <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#rulesButton" text="Pravidla hry" />
+      <Button layoutX="515.0" layoutY="360.0" mnemonicParsing="false" onAction="#exitButton" text="Ukončit" />
    </children>
 </AnchorPane>

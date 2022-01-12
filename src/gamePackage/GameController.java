@@ -114,19 +114,18 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void showAdvice(ActionEvent event){
-
-    }
-
-    @FXML
     public void showRules(ActionEvent event) throws IOException {
         System.out.println("showRules()");
+        showNewWindow("rules.fxml", "Pravidla hry");
+    }
+
+    public void showNewWindow(String fileName, String title) throws IOException {
         FXMLLoader fxmlloader = new FXMLLoader();
-        fxmlloader.setLocation(getClass().getResource("rules.fxml"));
+        fxmlloader.setLocation(getClass().getResource(fileName));
         Scene scene = new Scene(fxmlloader.load());
         Stage gameStage = new Stage();
         gameStage.setScene(scene);
-        gameStage.setTitle("Pravidla hry");
+        gameStage.setTitle(title);
         gameStage.show();
     }
 
@@ -198,12 +197,7 @@ public class GameController implements Initializable {
             Stage gameStage = (Stage) backToMenu.getScene().getWindow();
             gameStage.close();
 
-            FXMLLoader fxmlloader = new FXMLLoader();
-            fxmlloader.setLocation(getClass().getResource("menu.fxml"));
-            Scene menuScene = new Scene(fxmlloader.load());
-            Stage menuStage = new Stage();
-            menuStage.setScene(menuScene);
-            menuStage.show();
+            showNewWindow("menu.fxml", "Menu");
         }
     }
 
@@ -220,8 +214,8 @@ public class GameController implements Initializable {
         Random rd = new Random();
 
         if (!cubeThrown) {
-            //cube = rd.nextInt(6) + 1;
-            cube = Integer.parseInt(cubeHack.getText());
+            cube = rd.nextInt(6) + 1;
+            //cube = Integer.parseInt(cubeHack.getText());
 
             cubePicture.setImage(images[cube - 1]);
             cubeThrown = true;
@@ -232,7 +226,7 @@ public class GameController implements Initializable {
             } else {
                 textAreaInfo.appendText(onTheMovePlayer.getName() + " pohni figurkou\n");
             }
-        } else { System.out.println("You can throw cube just once!");}
+        } else { /*System.out.println("You can throw cube just once!");*/}
     }
 
     @FXML
@@ -244,13 +238,10 @@ public class GameController implements Initializable {
             return;
         }
 
-
-
         clickedCircle = (Circle) mouseEvent.getSource();
         if(!clickedPawn(clickedCircle)){
             return;
         }
-        System.out.println("End of handle");
         cubeThrown = false;
     }
 
@@ -258,7 +249,6 @@ public class GameController implements Initializable {
         System.out.println("clickedPawn()");
         clickedCircle = circle;
 
-        // určování kdo zrovna kliknul na políčko
         if (colorBlue.equals(clickedCircle.getFill())) {
             clickedPlayer = bluePlayer;
         } else if (colorGreen.equals(clickedCircle.getFill())) {
@@ -270,11 +260,9 @@ public class GameController implements Initializable {
         } else {
             return false;
         }
-        // ten kdo kliknul a hráč který má být zrovna na tahu(onTheMove) bude hrát
         if (clickedPlayer == onTheMovePlayer) {
             if (clickedCircle.getId().equals(clickedPlayer.getHome1()) || clickedCircle.getId().equals(clickedPlayer.getHome2()) ||
                     clickedCircle.getId().equals(clickedPlayer.getHome3()) || clickedCircle.getId().equals(clickedPlayer.getHome4())) {
-                System.out.println("The pawn you clicked is in home");
                 if (cube == 6) {
                     respawn(clickedCircle, clickedPlayer);
                 } else { return false; }
@@ -289,8 +277,7 @@ public class GameController implements Initializable {
                 }
             }
         } else {
-            //This player is not on the move
-            return false;
+            return false; //This player is not on the move
         }
         changePlayerOnTheMove();
         return true;
@@ -384,8 +371,6 @@ public class GameController implements Initializable {
         } else {
             if (clickedPlayer.getPawn1().equals(futureIdString) || clickedPlayer.getPawn2().equals(futureIdString) ||
                     clickedPlayer.getPawn3().equals(futureIdString) || clickedPlayer.getPawn4().equals(futureIdString)) {
-                //place is occupied
-                System.out.println("The home is already occupied this pawn can not move");
                 return false;
             } else {
                 //going home
@@ -444,16 +429,12 @@ public class GameController implements Initializable {
             clickedPlayer.setPawn3(futureId);
         } else if (clickedPlayer.getPawn4().equals(lastId)) {
             clickedPlayer.setPawn4(futureId);
-        } else {
-            System.out.println("ERROR I CAN NOT SET NEW ID");
         }
     }
 
     public void respawn(Circle clickedCircle, Player actualPlayer) {
         System.out.println("respawn()");
-        // checknout brani (pozor na brani vlastniho hrace!)
 
-        System.out.println("Id clickedCircle " + clickedCircle.getId());
         getCircle("#" + clickedCircle.getId()).setFill(colorWhite);
 
         String lastId = clickedCircle.getId();
@@ -474,22 +455,16 @@ public class GameController implements Initializable {
             if (cube != 6) {
                 onTheMoveIndex++;
             } else {
-                System.out.println("cube = 6 I will check canMoveFuture()");
-
-
                 boolean testcanMove = canMove(cube);
                 boolean testcanMoveFuture = canMoveFuture();
                 boolean testCubeThrow = cubeThrown;
 
 
                 if(canMove(cube) && cubeThrown){
-                    // index is the same
-                    System.out.println("canMove and cubeThrown - will play again");
+                    // player will play again
                 }else if(!canMove(cube) && cubeThrown){
                     onTheMoveIndex++;
-                    System.out.println("can not move and cubeThrow");
                 }else if(!cubeThrown && canMoveFuture()){
-                    System.out.println("did not throw the bube and can move in future - will play again");
                 }
 
                 System.out.println("can player move: " + testcanMove);

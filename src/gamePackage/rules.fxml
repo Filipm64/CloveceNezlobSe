@@ -6,10 +6,11 @@
 
 <AnchorPane prefHeight="309.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gamePackage.RulesController">
    <children>
-      <Label layoutX="200.0" layoutY="30.0" text="Pravidla hry">
+      <Label layoutX="205.0" layoutY="33.0" text="Pravidla hry">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextArea fx:id="rulesArea" editable="false" layoutX="58.0" layoutY="76.0" prefHeight="200.0" prefWidth="443.0"  wrapText="true" />
+      <TextArea fx:id="rulesArea" editable="false" layoutX="40.0" layoutY="76.0" prefHeight="172.0" prefWidth="461.0" wrapText="true" />
+      <Label layoutX="69.0" layoutY="261.0" text="PRO SPRÁVNÝ CHOD HRY DODRŽUJTE POKYNY V INFORMAČNÍM PANELU." textFill="#df0d0d" />
    </children>
 </AnchorPane>

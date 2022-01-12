@@ -7,3 +7,6 @@ Pokud hráč při hře hodí šestku může nasadit novou figurku na startovní 
 Jestliže nemá hráč jak pohnout hraje další hráč.
 
 Vyhrává ten hráč, který první oběhne hrací plán všemi svými figurkami a umístí je do cílového domečku. Ostatní hráči poté pokračují ve hře a hrají tak o další pořadí.
+
+Hod kostkou: Hod kostkou provede hráč tak, že klikne na modrý obrázek kostky.
+Pohyb figurkou: Pohyb figurkou provede hráč tak, že klikna na figurku, se kterou chce pohnout. Pokud s ní nemůžeš pohnout klikni na jinou figurku.

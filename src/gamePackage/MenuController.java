@@ -1,5 +1,7 @@
 package gamePackage;
 
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,6 +98,17 @@ public class MenuController implements Initializable {
     public void rulesButton(ActionEvent event) throws IOException {
 
         loadFXML("rules.fxml", "Pravidla hry");
+    }
+
+    @FXML
+    public void exitButton(ActionEvent event){
+        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Doopravdy chceš odejít? ", ButtonType.YES, ButtonType.NO);
+        exitAlert.showAndWait();
+
+        if (exitAlert.getResult() == ButtonType.YES) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 
     public void loadFXML(String fileName, String title) throws IOException {
