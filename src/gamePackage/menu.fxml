@@ -18,19 +18,19 @@
       <TextField fx:id="greenName" layoutX="300.0" layoutY="155.0" text="Player2" />
       <TextField fx:id="redName" layoutX="300.0" layoutY="198.0" text="Player3" />
       <TextField fx:id="yellowName" layoutX="300.0" layoutY="245.0" text="Player4" />
-      <Label layoutX="108.0" layoutY="113.0" text="Modrý hráč:" textFill="#1716d9">
+      <Label layoutX="85.0" layoutY="113.0" text="Modrý hráč:" textFill="#1716d9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label layoutX="116.0" layoutY="154.0" text="Zelený hráč:" textFill="#10e91b">
+      <Label layoutX="92.0" layoutY="154.0" text="Zelený hráč:" textFill="#10e91b">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="94.0" layoutY="197.0" text="Červený hráč:" textFill="#da1010">
+      <Label layoutX="72.0" layoutY="197.0" text="Červený hráč:" textFill="#da1010">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label layoutX="118.0" layoutY="240.0" text="Žlutý hráč:" textFill="#f5e102">
+      <Label layoutX="96.0" layoutY="240.0" text="Žlutý hráč:" textFill="#f5e102">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>

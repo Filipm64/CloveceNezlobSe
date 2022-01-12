@@ -228,7 +228,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="cubeHack" GridPane.columnIndex="15" GridPane.rowIndex="3" />
+      <TextField fx:id="cubeHack" visible="false" GridPane.columnIndex="15" GridPane.rowIndex="3" />
       <Label prefHeight="18.0" prefWidth="105.0" text="Nyní hraje:" GridPane.columnIndex="9">
          <font>
             <Font size="14.0" />
