@@ -1,8 +1,10 @@
 package gamePackage;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +16,12 @@ public class RulesController implements Initializable {
 
     @FXML
     private TextArea rulesArea;
+
+    @FXML
+    public void closeRules(ActionEvent event){
+        Stage rulesStage = (Stage) rulesArea.getScene().getWindow();
+        rulesStage.close();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
