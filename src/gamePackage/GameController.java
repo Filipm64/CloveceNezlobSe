@@ -84,7 +84,7 @@ public class GameController implements Initializable {
     Paint colorBlue = Paint.valueOf("0x0000fff0");
     Paint colorGreen = Paint.valueOf("0x70f109ff");
     Paint colorRed = Paint.valueOf("0xff0000ff");
-    Paint colorYellow = Paint.valueOf("0xffff00ff");
+    Paint colorYellow = Paint.valueOf("#f5e102");
     Paint colorWhite = Paint.valueOf("0x1f93ff00");
 
     Player bluePlayer;
