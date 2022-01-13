@@ -300,7 +300,7 @@ public class GameController implements Initializable {
         if (futureId > 3) { return false; } // if is out of home
 
         for (int i = 0; i < 4; i++) {
-            if (("#" + futureIdString).equals(pawns[i])) { return false; //home is occupied
+            if (futureIdString.equals(pawns[i])) { return false; //home is occupied
             } else {
 
                 if (onTheMovePlayer.getPawn1().equals(clickedCircle.getId())) { //pawn1
